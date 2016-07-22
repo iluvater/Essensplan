@@ -36,7 +36,7 @@ public class Zutat {
         this.name = name;
     }
 
-    public boolean isEquals(Zutat z){
+    public boolean equals(Zutat z){
         if(this.name.equals(z.getName())&&this.einheit.equals(z.getEinheit())&&this.menge==z.getMenge()){
             return true;
         }else{

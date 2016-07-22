@@ -10,9 +10,8 @@ public class Rezept {
     private String name;
     private List<Zutat> zutaten;
 
-    public Rezept(String name){
+    public Rezept(){
         zutaten = new ArrayList<Zutat>();
-        this.name = name;
     }
     public String getName() {
         return name;
