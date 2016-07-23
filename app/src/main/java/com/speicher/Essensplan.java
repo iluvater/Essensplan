@@ -44,4 +44,20 @@ public class Essensplan {
             altMahlzeit.remove(m);
         }
     }
+
+    public void addZutat(Mahlzeit m){
+        if(!aktMahlzeit.contains(m)){
+            aktMahlzeit.add(m);
+        }
+    }
+
+    public void deleteZutat(Mahlzeit m){
+        if(aktMahlzeit.contains(m)){
+            aktMahlzeit.remove(m);
+        }else{
+            if(altMahlzeit.contains(m)){
+                altMahlzeit.remove(m);
+            }
+        }
+    }
 }

@@ -30,5 +30,35 @@ public class Einkaufsplan {
     public void setAltZutaten(List<Zutat> altZutaten) {
         this.altZutaten = altZutaten;
     }
+
+    public void checkOut(Zutat z){
+        if(aktZutaten.contains(z)){
+            altZutaten.add(z);
+            aktZutaten.remove(z);
+        }
+    }
+
+    public void checkIn(Zutat z){
+        if(altZutaten.contains(z)){
+            aktZutaten.add(z);
+            altZutaten.remove(z);
+        }
+    }
+
+    public void addZutat(Zutat z){
+        if(!aktZutaten.contains(z)){
+            aktZutaten.add(z);
+        }
+    }
+
+    public void deleteZutat(Zutat z){
+        if(aktZutaten.contains(z)){
+            aktZutaten.remove(z);
+        }else{
+            if(altZutaten.contains(z)){
+                altZutaten.remove(z);
+            }
+        }
+    }
 }
 
