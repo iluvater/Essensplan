@@ -2,4 +2,6 @@
     <string name="app_name">Essensplan</string>
     <string name="settings">Einstellungen</string>
     <string name="entwickler">Laura Birkheuer und Ture Küsener</string>
+    <string name="EssensplanDatei">Essensplan.json</string>
+    <string name="EinkaufsplanDatei">Einkaufsplan.json</string>
 </resources>
