@@ -43,4 +43,8 @@ public class Zutat {
             return false;
         }
     }
+
+    public String toString(){
+        return menge + " " + einheit + " " + name;
+    }
 }

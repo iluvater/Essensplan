@@ -4,4 +4,7 @@
     <string name="entwickler">Laura Birkheuer und Ture Küsener</string>
     <string name="EssensplanDatei">Essensplan.json</string>
     <string name="EinkaufsplanDatei">Einkaufsplan.json</string>
+    <string name="one">Essensplan</string>
+    <string name="two">Einkaufsplan</string>
+    <string name="three">Rezepte</string>
 </resources>
