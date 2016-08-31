@@ -1,17 +1,22 @@
 package com.speicher;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Ture on 22.07.2016.
  */
-public class Rezept {
+public class Rezept implements Serializable{
     private String name;
     private List<Zutat> zutaten;
 
     public Rezept(){
         zutaten = new ArrayList<Zutat>();
+    }
+    public Rezept(String name){
+        zutaten = new ArrayList<Zutat>();
+        this.name = name;
     }
     public String getName() {
         return name;
@@ -44,4 +49,9 @@ public class Rezept {
     public void deleteZutat(Zutat z){
         zutaten.remove(z);
     }
+
+    public String toString(){
+        return name;
+    }
+
 }

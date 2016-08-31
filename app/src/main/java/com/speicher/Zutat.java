@@ -1,9 +1,11 @@
 package com.speicher;
 
+import java.io.Serializable;
+
 /**
  * Created by Ture on 22.07.2016.
  */
-public class Zutat {
+public class Zutat implements Serializable{
     private double menge;
     private String einheit;
     private String name;

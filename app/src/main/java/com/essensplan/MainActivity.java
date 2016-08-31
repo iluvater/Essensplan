@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new OneFragment(), "Essensplan");
         adapter.addFragment(new TwoFragment(), "Einkaufsliste");
-        adapter.addFragment(new ThreeFragment(), "Rezepte");
+        adapter.addFragment( new ThreeFragment(), "Rezepte");
         viewPager.setAdapter(adapter);
     }
 
