@@ -9,9 +9,13 @@ public class Zutat implements Serializable{
     private double menge;
     private String einheit;
     private String name;
+    private int id;
 
-    public Zutat(String name){
+    public Zutat(String name, double menge, String einheit, int id){
         this.name =name;
+        this.menge=menge;
+        this.einheit=einheit;
+        this.id = id;
     }
 
     public double getMenge() {
@@ -48,5 +52,13 @@ public class Zutat implements Serializable{
 
     public String toString(){
         return menge + " " + einheit + " " + name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

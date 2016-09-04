@@ -10,6 +10,7 @@ import java.util.List;
 public class Rezept implements Serializable{
     private String name;
     private List<Zutat> zutaten;
+    private int id;
 
     public Rezept(){
         zutaten = new ArrayList<Zutat>();
@@ -54,4 +55,11 @@ public class Rezept implements Serializable{
         return name;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

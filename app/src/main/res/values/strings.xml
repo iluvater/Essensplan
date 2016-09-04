@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Essensplan</string>
     <string name="settings">Einstellungen</string>
-    <string name="entwickler">Laura Birkheuer und Ture Küsener</string>
+    <string name="entwickler">Ture Küsener</string>
     <string name="EssensplanDatei">Essensplan.json</string>
     <string name="EinkaufsplanDatei">Einkaufsplan.json</string>
     <string name="one">Essensplan</string>
@@ -9,15 +9,4 @@
     <string name="three">Rezepte</string>
     <string name="neues_rezept">Neues Rezept</string>
     <string name="neue_zutat">Neue Zutat</string>
-    <string-array name="Planets">
-        <item>Sun</item>
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
-    </string-array>
 </resources>

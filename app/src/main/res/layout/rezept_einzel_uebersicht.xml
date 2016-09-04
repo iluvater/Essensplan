@@ -10,17 +10,11 @@
         android:id="@+id/buttonaddZutat"
         android:layout_gravity="center_horizontal" />
 
-    <EditText
-        android:layout_width="379dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:layout_gravity="right"
-        android:layout_below="@+id/buttonaddZutat" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listViewZutaten"
         android:layout_gravity="center_horizontal"
-        android:layout_below="@+id/editText" />
+        android:layout_below="@+id/buttonaddZutat" />
 </LinearLayout>

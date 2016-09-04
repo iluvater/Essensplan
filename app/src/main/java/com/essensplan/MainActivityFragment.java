@@ -3,6 +3,7 @@ package com.essensplan;
 /**
  * Created by Ture on 30.06.2016.
  */
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,7 +19,7 @@ import com.speicher.Zutat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivityFragment extends Fragment{
+public class MainActivityFragment extends Fragment {
 
     public MainActivityFragment() {
     }
@@ -26,13 +27,13 @@ public class MainActivityFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Zutat zutat = new Zutat("Käse");
+        Zutat zutat = new Zutat("Käse", 100, "t", 0);
         zutat.setMenge(100);
         zutat.setEinheit("t");
         Einkaufsplan einkaufsplan = new Einkaufsplan();
         einkaufsplan.addZutat(zutat);
         List<String> zutatenstring = new ArrayList<>();
-        for (int i = 0;i<einkaufsplan.getAktZutaten().size();i++) {
+        for (int i = 0; i < einkaufsplan.getAktZutaten().size(); i++) {
             zutatenstring.add(einkaufsplan.getAktZutaten().get(i).toString());
         }
 
