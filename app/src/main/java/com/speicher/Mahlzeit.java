@@ -6,6 +6,7 @@ package com.speicher;
 public class Mahlzeit {
     private String datum;
     private Rezept rezept;
+    private int id;
 
     public Mahlzeit(String datum) {
         rezept = new Rezept();
@@ -26,5 +27,23 @@ public class Mahlzeit {
 
     public void setRezept(Rezept rezept) {
         this.rezept = rezept;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String toString(){
+        String res = getDatum()+ " : ";
+        if(rezept.getName()!=null){
+            res += rezept.getName();
+        }else{
+            res += "Neue Mahlzeit";
+        }
+        return res;
     }
 }

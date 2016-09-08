@@ -23,6 +23,8 @@ import com.speicher.EinkaufsDBDataSource;
 import com.speicher.Rezept;
 import com.speicher.Zutat;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ture on 31.08.2016.
  */
@@ -92,12 +94,14 @@ public class RezeptEinzelActivity extends AppCompatActivity {
             }
         });
 
+
+
         Button btn = (Button) findViewById(R.id.buttonaddZutat);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Zutat z1 = dataSource.createZutat("Neue Zutat", "", 0,rezeptid, 0);
+                Zutat z1 = dataSource.createZutat("Neue Zutat", "<Einheit>", 0,rezeptid, 0);
                 rezept.addZutat(z1);
                 adapter.notifyDataSetChanged();
             }

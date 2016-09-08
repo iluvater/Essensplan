@@ -16,5 +16,14 @@
         android:minWidth="350px"
         android:layout_below="@id/editTextName" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rezept löschen?"
+        android:id="@+id/buttonDelRezept"
+        android:minWidth="350px"
+        android:layout_below="@id/buttonDialog" />
+
+
 
 </RelativeLayout>

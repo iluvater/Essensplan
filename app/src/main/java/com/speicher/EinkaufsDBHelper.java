@@ -33,7 +33,7 @@ public class EinkaufsDBHelper extends SQLiteOpenHelper {
 
     public static final String[] TABLE_COLUMNS_ZUTATEN = {COLUMN_ID, COLUMN_NAME, COLUMN_EINHEIT, COLUMN_MENGE, COLUMN_REZEPT, COLUMN_EINKAUFSPLAN};
     public static final String[] TABLE_COLUMNS_REZEPTE = {COLUMN_ID, COLUMN_NAME};
-    public static final String[] TABLE_COLUMNS_MAHLZEITEN = {COLUMN_ID, COLUMN_DATUM, COLUMN_ESSENSPLAN};
+    public static final String[] TABLE_COLUMNS_MAHLZEITEN = {COLUMN_ID, COLUMN_DATUM, COLUMN_REZEPT, COLUMN_ESSENSPLAN};
     public static final String[] TABLE_COLUMNS_EINKAUFSPLAN = {COLUMN_ID};
     public static final String[] TABLE_COLUMNS_ESSENSPLAN = {COLUMN_ID};
 
@@ -55,15 +55,18 @@ public class EinkaufsDBHelper extends SQLiteOpenHelper {
             + COLUMN_REZEPT + " INTEGER, "
             + COLUMN_EINKAUFSPLAN + " INTEGER, "
             + " FOREIGN KEY (" + COLUMN_EINKAUFSPLAN + ") REFERENCES "
-            + TABLE_EINKAUFSPLAN + "(" + COLUMN_ID + ")" +
-            " FOREIGN KEY (" + COLUMN_REZEPT + ") REFERENCES " +
-            TABLE_REZEPTE + "(" + COLUMN_ID + "))";
+            + TABLE_EINKAUFSPLAN + "(" + COLUMN_ID + ")"
+            + " FOREIGN KEY (" + COLUMN_REZEPT + ") REFERENCES "
+            + TABLE_REZEPTE + "(" + COLUMN_ID + "))";
 
     public static final String CREATE_MAHLZEITEN = "CREATE TABLE " +
             TABLE_MAHLZEITEN + "(" + COLUMN_ID +
             " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_DATUM + " TEXT NOT NULL, "
+            + COLUMN_REZEPT + " INTEGER, "
             + COLUMN_ESSENSPLAN + " INTEGER, "
+            + " FOREIGN KEY (" + COLUMN_REZEPT + ") REFERENCES "
+            + TABLE_REZEPTE + "(" + COLUMN_ID + ")"
             + "FOREIGN KEY (" + COLUMN_ESSENSPLAN
             + ") REFERENCES " + TABLE_ESSENSPLAN
             + "(" + COLUMN_ID + "))";

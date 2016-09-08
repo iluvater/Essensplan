@@ -110,6 +110,18 @@ public class ThreeFragment extends Fragment{
                     }
                 });
 
+                Button buttonDel = (Button) dialog.findViewById(R.id.buttonDelRezept);
+                buttonDel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rezepte.remove(r);
+                        dataSource.deleteRezept(r);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+
+                    }
+                });
+
                 dialog.show();
 
 

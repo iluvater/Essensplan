@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextDatumStart"
+        android:layout_gravity="right"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/logo"
+        android:maxHeight="100dp"
+        android:maxWidth="100dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Essensplan"
+        android:id="@+id/buttonEssen"
+        android:layout_gravity="center_horizontal"
+        android:minWidth="@dimen/tab_max_width"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Einkaufsliste"
+        android:id="@+id/buttonEinkauf"
+        android:layout_gravity="center_horizontal"
+        android:minWidth="@dimen/tab_max_width"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rezepte"
+        android:id="@+id/buttonRezept"
+        android:layout_gravity="center_horizontal"
+        android:minWidth="@dimen/tab_max_width"
+        android:layout_marginTop="30dp"/>
+
+</LinearLayout>

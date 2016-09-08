@@ -74,30 +74,34 @@ public class EinkaufsDBDataSource {
         return getRezept(insertId);
     }
 
-    public Rezept cursorToRezept(Cursor cursor){
-        int idName = cursor.getColumnIndex(EinkaufsDBHelper.COLUMN_NAME);
-        int idID =  cursor.getColumnIndex(EinkaufsDBHelper.COLUMN_ID);
+    public Rezept cursorToRezept(Cursor cursorForRezept){
+        int idName = cursorForRezept.getColumnIndex(EinkaufsDBHelper.COLUMN_NAME);
+        int idID =  cursorForRezept.getColumnIndex(EinkaufsDBHelper.COLUMN_ID);
 
-        int id = cursor.getInt(idID);
 
-        Rezept rezept = new Rezept(cursor.getString(idName));
-        rezept.setId(id);
-        Cursor ZutatenCursor = database.query(EinkaufsDBHelper.TABLE_ZUTATEN, EinkaufsDBHelper.TABLE_COLUMNS_ZUTATEN, EinkaufsDBHelper.COLUMN_REZEPT + "=" + id, null, null, null, null);
+            int id = cursorForRezept.getInt(idID);
 
-        ZutatenCursor.moveToFirst();
-        while(!ZutatenCursor.isAfterLast()){
-            Zutat z = cursorToZutat(ZutatenCursor);
-            rezept.addZutat(z);
-            ZutatenCursor.moveToNext();
-        }
-        ZutatenCursor.close();
-        return rezept;
+
+            Rezept rezept = new Rezept(cursorForRezept.getString(idName));
+            rezept.setId(id);
+            Cursor ZutatenCursor = database.query(EinkaufsDBHelper.TABLE_ZUTATEN, EinkaufsDBHelper.TABLE_COLUMNS_ZUTATEN, EinkaufsDBHelper.COLUMN_REZEPT + "=" + id, null, null, null, null);
+
+            ZutatenCursor.moveToFirst();
+            while (!ZutatenCursor.isAfterLast()) {
+                Zutat z = cursorToZutat(ZutatenCursor);
+                rezept.addZutat(z);
+                ZutatenCursor.moveToNext();
+            }
+            ZutatenCursor.close();
+            return rezept;
     }
 
     public Mahlzeit createMahlzeit(String datum, int rezeptid){
         ContentValues values =  new ContentValues();
         values.put(EinkaufsDBHelper.COLUMN_DATUM, datum);
-        values.put(EinkaufsDBHelper.TABLE_REZEPTE, rezeptid);
+        if(rezeptid!=0) {
+            values.put(EinkaufsDBHelper.COLUMN_REZEPT, rezeptid);
+        }
 
         long insertId = database.insert(EinkaufsDBHelper.TABLE_MAHLZEITEN, null, values);
         return getMahlzeit(insertId);
@@ -105,16 +109,23 @@ public class EinkaufsDBDataSource {
 
     public Mahlzeit cursorToMahlzeit(Cursor cursor){
         int idDatum = cursor.getColumnIndex(EinkaufsDBHelper.COLUMN_DATUM);
-        int idRezept = cursor.getColumnIndex(EinkaufsDBHelper.TABLE_REZEPTE);
-
-        Cursor cRezept = database.query(EinkaufsDBHelper.TABLE_REZEPTE, EinkaufsDBHelper.TABLE_COLUMNS_REZEPTE, EinkaufsDBHelper.COLUMN_ID + "=" + idRezept, null, null, null, null);
-
-        Rezept rezept = cursorToRezept(cRezept);
+        int idRezept = cursor.getColumnIndex(EinkaufsDBHelper.COLUMN_REZEPT);
+        int idId = cursor.getColumnIndex(EinkaufsDBHelper.COLUMN_ID);
 
         String datum = cursor.getString(idDatum);
-
         Mahlzeit mahlzeit = new Mahlzeit(datum);
-        mahlzeit.setRezept(rezept);
+        mahlzeit.setId(Integer.parseInt(cursor.getString(idId)));
+
+        if(idRezept!=-1){
+            Cursor cRezept = database.query(EinkaufsDBHelper.TABLE_REZEPTE, EinkaufsDBHelper.TABLE_COLUMNS_REZEPTE, EinkaufsDBHelper.COLUMN_ID + "=" + cursor.getString(idRezept), null, null, null, null);
+
+            cRezept.moveToFirst();
+
+            //Rezept rezept = cursorToRezept(cRezept);
+            //mahlzeit.setRezept(rezept);
+            cRezept.close();
+        }
+
 
         return mahlzeit;
     }
@@ -146,6 +157,24 @@ public class EinkaufsDBDataSource {
 
         Cursor cursor = database.query(EinkaufsDBHelper.TABLE_ZUTATEN,
                 EinkaufsDBHelper.TABLE_COLUMNS_ZUTATEN, EinkaufsDBHelper.COLUMN_REZEPT + "=" + rezeptid, null, null, null, null);
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            Zutat z;
+            z = cursorToZutat(cursor);
+            list.add(z);
+            cursor.moveToNext();
+        }
+        cursor.close();
+
+        return list;
+    }
+
+    public List<Zutat> showAllZutatenEinkaufsliste(){
+        List<Zutat> list = new ArrayList<>();
+
+        Cursor cursor = database.query(EinkaufsDBHelper.TABLE_ZUTATEN,
+                EinkaufsDBHelper.TABLE_COLUMNS_ZUTATEN, EinkaufsDBHelper.COLUMN_REZEPT + " IS NULL" , null, null, null, null);
         cursor.moveToFirst();
 
         while(!cursor.isAfterLast()){
@@ -223,4 +252,25 @@ public class EinkaufsDBDataSource {
 
         database.update(EinkaufsDBHelper.TABLE_REZEPTE, values, EinkaufsDBHelper.COLUMN_ID + "=" + r.getId(), null);
     }
+
+    public void updateMahlzeit(Mahlzeit m){
+        ContentValues values = new ContentValues();
+        values.put(EinkaufsDBHelper.COLUMN_DATUM, m.getDatum());
+        values.put(EinkaufsDBHelper.COLUMN_REZEPT, m.getRezept().getId());
+
+        database.update(EinkaufsDBHelper.TABLE_MAHLZEITEN, values, EinkaufsDBHelper.COLUMN_ID + "=" + m.getId(), null);
+    }
+
+    public void deleteZutat(Zutat z){
+        database.delete(EinkaufsDBHelper.TABLE_ZUTATEN, EinkaufsDBHelper.COLUMN_ID + "=" + z.getId() , null);
+    }
+
+    public void deleteRezept(Rezept r){
+        database.delete(EinkaufsDBHelper.TABLE_REZEPTE, EinkaufsDBHelper.COLUMN_ID + "=" + r.getId() , null);
+    }
+
+    public void deleteMahlzeit(Mahlzeit m){
+        database.delete(EinkaufsDBHelper.TABLE_MAHLZEITEN, EinkaufsDBHelper.COLUMN_ID + "=" + m.getId() , null);
+    }
+
 }

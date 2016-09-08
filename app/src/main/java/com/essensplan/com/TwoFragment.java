@@ -49,7 +49,7 @@ public class TwoFragment extends Fragment{
 
 
 
-         zutaten = (ArrayList<Zutat>)dataSource.showAllZutaten(einkaufsplanid);
+         zutaten = (ArrayList<Zutat>)dataSource.showAllZutatenEinkaufsliste();
         // rezepte = new ArrayList<>();
 
         final ArrayAdapter<Zutat> adapter= new ArrayAdapter<Zutat>(
@@ -96,12 +96,41 @@ public class TwoFragment extends Fragment{
             }
         });
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           final int pos, long id) {
+                final Zutat z = zutaten.get(pos);
+                final Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(R.layout.popup_dialog_loeschen);
+                dialog.setTitle("Eintrag löschen?");
+
+
+                Button btn = (Button) dialog.findViewById(R.id.buttonDelDialog);
+
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        zutaten.remove(z);
+                        dataSource.deleteZutat(z);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+
+                    }
+                });
+
+                dialog.show();
+
+
+                return true;
+            }
+        });
+
 
         Button btn = (Button) view.findViewById(R.id.addbuttonRezepte);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Zutat z = dataSource.createZutat("Neuer Eintrag", "", 0, 0, einkaufsplanid);
+                Zutat z = dataSource.createZutat("Neuer Eintrag", "<Einheit>", 0, 0, einkaufsplanid);
                 zutaten.add(z);
                 adapter.notifyDataSetChanged();
             }
