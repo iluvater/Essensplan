@@ -121,8 +121,8 @@ public class EinkaufsDBDataSource {
 
             cRezept.moveToFirst();
 
-            //Rezept rezept = cursorToRezept(cRezept);
-            //mahlzeit.setRezept(rezept);
+            Rezept rezept = cursorToRezept(cRezept);
+            mahlzeit.setRezept(rezept);
             cRezept.close();
         }
 

@@ -39,7 +39,7 @@ public class Mahlzeit {
 
     public String toString(){
         String res = getDatum()+ " : ";
-        if(rezept.getName()!=null){
+        if(null != rezept.getName()){
             res += rezept.getName();
         }else{
             res += "Neue Mahlzeit";
