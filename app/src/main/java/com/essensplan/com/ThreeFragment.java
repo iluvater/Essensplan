@@ -105,6 +105,7 @@ public class ThreeFragment extends Fragment{
                         rezepte.clear();
                         rezepte.addAll(neuRezepte);
                         adapter.notifyDataSetChanged();
+
                         dialog.dismiss();
 
                     }
